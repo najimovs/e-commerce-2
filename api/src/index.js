@@ -2,21 +2,12 @@ import express from "express"
 import cors from "cors"
 import { executeQuery } from "./utils/db.js"
 
+import categories from "./routes/categories.js"
+
 const server = express()
 server.use( cors() )
 server.use( express.json() )
-
-server.get( "/categories", async ( _, res ) => {
-
-	res.send( await executeQuery( `
-		select
-			c.name name,
-			count(p.category_id) count_of_products
-		from products p
-		join categories c on c.id = p.category_id
-		group by c.id
-	` ) )
-} )
+server.use( "/categories", categories )
 
 const ITEMS_PER_PAGE = 10
 

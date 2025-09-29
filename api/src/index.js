@@ -1,6 +1,6 @@
 import express from "express"
 import cors from "cors"
-import { executeQuery } from "./db.js"
+import { executeQuery } from "./utils/db.js"
 
 const server = express()
 server.use( cors() )

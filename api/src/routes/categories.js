@@ -15,4 +15,35 @@ router.get( "/", async ( _, res ) => {
 	` ) )
 } )
 
+router.post( "/", async ( req, res ) => {
+
+	if ( !req.body ) {
+
+		res.status( 400 ).end()
+		return
+	}
+
+	const { name } = req.body
+
+	if ( !name ) {
+
+		res.status( 400 ).end()
+		return
+	}
+
+	try {
+
+		await executeQuery( `
+			insert into categories(name)
+			values ($1)
+		`, name )
+
+		res.status( 201 ).send( { message: "ok" } )
+	}
+	catch( error ) {
+
+		res.status( 400 ).send( { message: error.message } )
+	}
+} )
+
 export default router

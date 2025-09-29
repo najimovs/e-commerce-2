@@ -7,7 +7,7 @@ create table users (
 
 create table categories (
 	id serial primary key,
-	name varchar(32) not null,
+	name varchar(32) not null unique,
 	img_url varchar(255) default '/image/no_image.png'
 );
 
